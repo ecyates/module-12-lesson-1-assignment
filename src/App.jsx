@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import ContactList from "./components/ContactList";
+import ContactContext from "./context/ContactContext";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Products from "./components/Products";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [contacts] = useState([
+    {id: 1, name: 'Amber', bg:'bg-dark'}, 
+    {id: 2, name: 'Beverly', bg:'bg-light'}, 
+    {id: 3, name: 'Clara', bg:'bg-light'}, 
+    {id: 4, name: 'Daniela', bg:'bg-light'}, 
+    {id: 5, name: 'Elsbeth', bg:'bg-light'}, 
+    {id: 6, name: 'Flora', bg:'bg-light'}, 
+    {id: 7, name: 'Gabby', bg:'bg-light'}, 
+    {id: 8, name: 'Hannah', bg:'bg-light'}, 
+    {id: 9, name: 'Izzy', bg:'bg-light'}, 
+    {id: 10, name: 'Jasmine', bg:'bg-light'}, 
+  ]);
+  const [ selectedContact, setSelectedContact] = useState(contacts[0].id);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <ContactContext.Provider value={{contacts, selectedContact, setSelectedContact}}>
+      <ContactList />
+    </ContactContext.Provider>
+      <Products/>
     </>
   )
-}
+};
 
-export default App
+export default App;
